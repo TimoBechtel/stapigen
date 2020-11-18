@@ -1,3 +1,5 @@
+import * as fs from 'fs';
+import * as path from 'path';
 import { Parser } from './common/parserApi';
 
 export type Config = {
@@ -17,8 +19,8 @@ type Schema = {
 };
 
 export async function parseConfigFile(file: string): Promise<Config> {
-	// TODO: error handling
-	const config = await loadConfigFile(file);
+	if (!fs.existsSync(file)) throw `Config file does not exist. (${file})`;
+	const config = await loadConfigFile(path.resolve(file));
 	validateConfig(config);
 	return config;
 }
