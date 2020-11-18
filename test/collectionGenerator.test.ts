@@ -27,7 +27,6 @@ test('generates collections', () => {
 			tags: {
 				year: '2019',
 				month: '12',
-				day: '24',
 			},
 		},
 	];
@@ -62,10 +61,6 @@ test('generates collections', () => {
 		},
 		{
 			path: '2019/12',
-			data: [testData[2]],
-		},
-		{
-			path: '2019/12/24',
 			data: [testData[2]],
 		},
 	];

@@ -28,6 +28,7 @@ function recursiveGenerate(
 
 	const tag = parsedSchema[0];
 	dataList.forEach((entry) => {
+		if (!entry.tags[tag]) return;
 		const collectionDir = path.join(currentPath, entry.tags[tag]);
 		const collection = collections.find((c) => c.path === collectionDir);
 		if (collection) collection.data.push(entry);
