@@ -1,21 +1,55 @@
 import * as path from 'path';
 import * as fs from 'fs';
+import * as mock from 'mock-fs';
 import { Config } from '../src/config';
 import { generateApi } from '../src/stapigen';
 
-const testDir = path.resolve('./test/_tmp');
+const testDir = 'test/_tmp';
+
 beforeAll(() => {
-	fs.mkdirSync(testDir, { recursive: true });
+	mock(
+		{
+			[testDir]: {},
+			'test/example/input': {
+				'2020': {
+					'04': {
+						'10': {
+							'lorem.md': `# lorem
+
+Lorem ipsum dolor sit amet, consectetur adipisici elit,
+`,
+						},
+						'13': {
+							'incompatible.file': '',
+							'randomNotes.md': `# these are my random notes
+
+- apples
+- oranges
+- bread
+`,
+							'thoughts.md': `# random thoughts
+
+Do we live in a simulation? Yes.
+`,
+						},
+					},
+				},
+			},
+		},
+		{ createCwd: true, createTmp: true }
+	);
 });
 
 afterAll(() => {
-	fs.rmdirSync(testDir, { recursive: true });
+	mock.restore();
 });
 
 test('generates files from config', async () => {
+	global.console.warn = jest.fn();
+
 	const config: Config = {
 		input: {
-			dir: path.resolve('./test/example/input'),
+			dir: 'test/example/input',
 			schema: ':year/:month/:day',
 		},
 		output: {
@@ -29,10 +63,11 @@ test('generates files from config', async () => {
 			},
 		],
 	};
-	await generateApi(config);
-
 	const expectedFiles = ['/index.json', '/04/index.json', '/04/13/index.json'];
 
+	await generateApi(config);
+
+	expect(console.warn).toHaveBeenCalledTimes(1);
 	expectedFiles.forEach((file) => {
 		expect(fs.existsSync(path.join(testDir, file))).toBe(true);
 	});

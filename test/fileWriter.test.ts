@@ -1,3 +1,4 @@
+import * as mock from 'mock-fs';
 import * as fs from 'fs';
 import * as path from 'path';
 import { createFileWriter } from '../src/fileWriter';
@@ -5,11 +6,16 @@ import { createFileWriter } from '../src/fileWriter';
 const testRoot = 'testdir';
 const testPath = 'testdir/subdir';
 beforeAll(() => {
-	fs.mkdirSync(testPath, { recursive: true });
+	mock(
+		{
+			'testdir/subdir': {},
+		},
+		{ createCwd: true, createTmp: true }
+	);
 });
 
 afterAll(() => {
-	fs.rmdirSync(testRoot, { recursive: true });
+	mock.restore();
 });
 
 test('writes file using stringifier', async () => {

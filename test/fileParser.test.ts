@@ -1,14 +1,20 @@
 import { parseFile } from '../src/fileParser';
-import * as fs from 'fs';
+import * as mock from 'mock-fs';
+
 const testFile = 'testFile.txt';
 const testContent = '123';
 
 beforeAll(() => {
-	fs.writeFileSync(testFile, testContent);
+	mock(
+		{
+			[testFile]: testContent,
+		},
+		{ createCwd: true, createTmp: true }
+	);
 });
 
 afterAll(() => {
-	fs.unlinkSync(testFile);
+	mock.restore();
 });
 
 test('reads and parses file using parser', async () => {
