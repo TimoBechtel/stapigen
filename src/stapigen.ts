@@ -39,7 +39,7 @@ async function writeCollections(
 					if (error) return reject(error);
 					await writeFile(directory, { name: 'index', data });
 					await Promise.all(
-						data.map((data) => writeFile(directory, { name: data.name, data }))
+						data.map((data) => writeFile(directory, { name: data.id, data }))
 					);
 					resolve();
 				});

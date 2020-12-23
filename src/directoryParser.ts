@@ -5,7 +5,7 @@ import { parseFile } from './fileParser';
 import { reverse } from './common/utils';
 
 export type DataObject = {
-	name: string;
+	id: string;
 	tags: {
 		[key: string]: string;
 	};
@@ -48,10 +48,10 @@ export function createDirectoryParser({
 								`no parser found for file ${currentFileOrDirPath}`
 							);
 
-						const name = path.parse(file.name).name;
+						const id = path.parse(file.name).name;
 						const tags = parseTags(subdirectory, parsedSchema);
 						const data = await parseFile(currentFileOrDirPath, parse);
-						dataList.push({ name, tags, data });
+						dataList.push({ id, tags, data });
 					}
 				})
 		);

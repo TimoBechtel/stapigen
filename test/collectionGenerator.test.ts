@@ -4,7 +4,7 @@ import { DataObject } from '../src/directoryParser';
 test('generates collections', () => {
 	const testData: DataObject[] = [
 		{
-			name: 'test1',
+			id: 'test1',
 			data: { n: 1 },
 			tags: {
 				year: '2020',
@@ -13,7 +13,7 @@ test('generates collections', () => {
 			},
 		},
 		{
-			name: 'test2',
+			id: 'test2',
 			data: { n: 2 },
 			tags: {
 				year: '2020',
@@ -22,7 +22,7 @@ test('generates collections', () => {
 			},
 		},
 		{
-			name: 'test1',
+			id: 'test1',
 			data: { n: 3 },
 			tags: {
 				year: '2019',
