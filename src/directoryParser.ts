@@ -35,10 +35,17 @@ export function createDirectoryParser({
 					const currentFileOrDirPath = path.join(curDirectory, file.name);
 					if (file.isDirectory()) {
 						dataList.push(
-							...(await traverseDirectory(
-								directory,
-								path.join(subdirectory, file.name)
-							))
+							...(
+								await traverseDirectory(
+									directory,
+									path.join(subdirectory, file.name)
+								)
+							).map((data) => {
+								if (dataList.some(({ id }) => data.id === id)) {
+									throw `Entry with id "${data.id}" already exists. Make sure that every file has a unique identifier.`;
+								}
+								return data;
+							})
 						);
 					} else {
 						const extension = path.extname(file.name);
@@ -48,9 +55,10 @@ export function createDirectoryParser({
 								`no parser found for file ${currentFileOrDirPath}`
 							);
 
-						const id = path.parse(file.name).name;
+						const id = path.parse(file.name).name.toLowerCase();
 						const tags = parseTags(subdirectory, parsedSchema);
 						const data = await parseFile(currentFileOrDirPath, parse);
+
 						dataList.push({ id, tags, data });
 					}
 				})

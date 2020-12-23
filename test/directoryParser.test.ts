@@ -67,7 +67,7 @@ test('parses complete directory', async () => {
 			name: 'Imafileinsomeotherdir.md',
 			content: 'nothing',
 		},
-		id: 'Imafileinsomeotherdir',
+		id: 'imafileinsomeotherdir',
 		tags: {
 			year: '2020',
 		},
@@ -82,7 +82,7 @@ test('parses complete directory', async () => {
 `,
 			name: 'randomNotes.md',
 		},
-		id: 'randomNotes',
+		id: 'randomnotes',
 		tags: {
 			year: '2020',
 			month: '04',

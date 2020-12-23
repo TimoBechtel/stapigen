@@ -73,12 +73,12 @@ test('generates files from config', async () => {
 	const expectedFiles = [
 		'/lorem.json',
 		'/thoughts.json',
-		'/randomNotes.json',
+		'/randomnotes.json',
 		'/04/lorem.json',
 		'/04/thoughts.json',
-		'/04/randomNotes.json',
+		'/04/randomnotes.json',
 		'/04/13/thoughts.json',
-		'/04/13/randomNotes.json',
+		'/04/13/randomnotes.json',
 	];
 
 	await generateApi(config);
