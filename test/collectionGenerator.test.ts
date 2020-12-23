@@ -60,6 +60,10 @@ test('generates collections', () => {
 			data: [testData[1]],
 		},
 		{
+			path: '2020/03/02/_',
+			data: [testData[1]],
+		},
+		{
 			path: '2019',
 			data: [testData[2]],
 		},
@@ -67,8 +71,16 @@ test('generates collections', () => {
 			path: '2019/12',
 			data: [testData[2]],
 		},
+		{
+			path: '2019/12/_',
+			data: [testData[2]],
+		},
+		{
+			path: '2019/12/_/test',
+			data: [testData[2]],
+		},
 	];
-	// testData[2] will not be added to collection '2019/12/test', as schema expects 'year/month/day/topic' and day is missing
+
 	const testSchema = ['year', 'month', 'day', 'topic'];
 	const collections = generateCollections(testSchema, testData);
 

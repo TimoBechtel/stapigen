@@ -1,6 +1,8 @@
 import * as path from 'path';
 import { DataObject } from './directoryParser';
 
+export const UNCATEGORIZED_COLLECTION = '_';
+
 export type Collection = {
 	path: string;
 	data: DataObject[];
@@ -28,8 +30,8 @@ function recursiveGenerate(
 
 	const tag = parsedSchema[0];
 	dataList.forEach((entry) => {
-		let collectionName = entry.tags[tag] || entry.data[tag];
-		if (collectionName === undefined || collectionName === '') return;
+		let collectionName =
+			entry.tags[tag] || (entry.data[tag] ?? UNCATEGORIZED_COLLECTION);
 
 		const collectionDir = path.join(currentPath, collectionName + '');
 		const collection = collections.find((c) => c.path === collectionDir);

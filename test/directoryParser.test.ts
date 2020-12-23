@@ -70,6 +70,8 @@ test('parses complete directory', async () => {
 		id: 'imafileinsomeotherdir',
 		tags: {
 			year: '2020',
+			month: '_',
+			day: '_',
 		},
 	});
 	expect(data).toContainEqual({

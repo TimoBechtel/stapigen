@@ -2,7 +2,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import { compatibleWith, GenericObjectData, Parser } from './common/parserApi';
 import { parseFile } from './fileParser';
-import { reverse } from './common/utils';
+import { UNCATEGORIZED_COLLECTION } from './collectionGenerator';
 
 export type DataObject = {
 	id: string;
@@ -76,7 +76,7 @@ function parseTags(
 	const tags = {};
 	parsedSchema.forEach((tagName, i) => {
 		const currentFolder = folders[i];
-		if (currentFolder) tags[tagName] = currentFolder;
+		tags[tagName] = currentFolder || UNCATEGORIZED_COLLECTION;
 	});
 	return tags;
 }
