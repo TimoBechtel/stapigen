@@ -63,12 +63,28 @@ test('generates files from config', async () => {
 			},
 		],
 	};
-	const expectedFiles = ['/index.json', '/04/index.json', '/04/13/index.json'];
+
+	const expectedIndexFiles = [
+		'/index.json',
+		'/04/index.json',
+		'/04/13/index.json',
+	];
+
+	const expectedFiles = [
+		'/lorem.json',
+		'/thoughts.json',
+		'/randomNotes.json',
+		'/04/lorem.json',
+		'/04/thoughts.json',
+		'/04/randomNotes.json',
+		'/04/13/thoughts.json',
+		'/04/13/randomNotes.json',
+	];
 
 	await generateApi(config);
 
 	expect(console.warn).toHaveBeenCalledTimes(1);
-	expectedFiles.forEach((file) => {
+	[...expectedFiles, ...expectedIndexFiles].forEach((file) => {
 		expect(fs.existsSync(path.join(testDir, file))).toBe(true);
 	});
 });

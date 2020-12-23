@@ -28,16 +28,19 @@ async function writeCollections(
 	collections: Collection[],
 	writeFile: (
 		directory: string,
-		file: { name: string; data: GenericObjectData[] }
+		file: { name: string; data: GenericObjectData[] | GenericObjectData }
 	) => Promise<void>
 ) {
 	await Promise.all(
 		collections.map(async ({ path: dir, data }) => {
 			const directory = path.join(outputDir, dir);
-			await new Promise((resolve, reject) => {
+			await new Promise<void>((resolve, reject) => {
 				fs.mkdir(directory, { recursive: true }, async (error) => {
 					if (error) return reject(error);
 					await writeFile(directory, { name: 'index', data });
+					await Promise.all(
+						data.map((data) => writeFile(directory, { name: data.name, data }))
+					);
 					resolve();
 				});
 			});

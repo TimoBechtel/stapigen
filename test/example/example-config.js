@@ -1,11 +1,11 @@
 module.exports = {
 	input: {
 		dir: 'input',
-		schema: ':year/:category/:movie',
+		schema: ':year/:category',
 	},
 	output: {
 		dir: 'output',
-		schema: ':category/:movie',
+		schema: ':category',
 	},
 	parser: [
 		{
