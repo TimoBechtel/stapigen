@@ -5,7 +5,7 @@ test('generates collections', () => {
 	const testData: DataObject[] = [
 		{
 			id: 'test1',
-			data: { n: 1 },
+			data: { n: 1, topic: 'testTopic' },
 			tags: {
 				year: '2020',
 				month: '04',
@@ -23,7 +23,7 @@ test('generates collections', () => {
 		},
 		{
 			id: 'test1',
-			data: { n: 3 },
+			data: { n: 3, topic: 'test' },
 			tags: {
 				year: '2019',
 				month: '12',
@@ -48,6 +48,10 @@ test('generates collections', () => {
 			data: [testData[0]],
 		},
 		{
+			path: '2020/04/13/testTopic',
+			data: [testData[0]],
+		},
+		{
 			path: '2020/03',
 			data: [testData[1]],
 		},
@@ -64,7 +68,8 @@ test('generates collections', () => {
 			data: [testData[2]],
 		},
 	];
-	const testSchema = ['year', 'month', 'day'];
+	// testData[2] will not be added to collection '2019/12/test', as schema expects 'year/month/day/topic' and day is missing
+	const testSchema = ['year', 'month', 'day', 'topic'];
 	const collections = generateCollections(testSchema, testData);
 
 	expect(collections).toHaveLength(expectedCollections.length);
