@@ -30,9 +30,12 @@
 
 ## About
 
-Stapigen allows you to generate a static, JSON based API out of an existing set of files. You can for example use it to generate an API for yaml or markdown files.
+Stapigen allows you to generate a static, file-based JSON API out of an existing set of files.
+You can, for example, use it to generate an API for yaml or markdown files, like a JAMstack blog.
 
-You can easily provide your own file parser, which allows you to generate an API for any filetype!
+You can easily provide your own file parser, which allows you to generate an API for any filetype.
+
+It's completely static, so you can host it with any static webserver or even Github Pages.
 
 ## Quickstart
 
@@ -146,10 +149,12 @@ Defines how the source files are structured.
 
 Location of input files.
 
-#### `input.schema`
+#### `input.schema` (optional)
 
 Structure of input files. e.g. `year/month/day`
 Stapigen generates tags out of the input directories (e.g. `year, month, day`). These are written in to the output json files and are used to generate output collections. (see [output.schema](#output.schema))
+
+If omitted or empty (`''`), it just parses everything recursively in `input.dir`, ignoring the file structure.
 
 ### `output`
 
@@ -159,7 +164,7 @@ Defines how the api should be structured.
 
 Location of output files.
 
-#### `output.schema`
+#### `output.schema` (optional)
 
 Defines the folder structure for the generated json files. e.g. `category/year`
 
@@ -185,6 +190,8 @@ category: magic
 ```
 
 will result in a file `output/magic/2020/myfile.json`. (when providing a [parser](#parser) for `.md` files)
+
+If omitted or empty (`''`), is just generates files directly in `output.dir` without creating folders.
 
 ### `parser`
 
