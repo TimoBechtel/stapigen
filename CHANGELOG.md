@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/TimoBechtel/stapigen/compare/v1.0.0...v1.0.1) (2020-12-27)
+
+
+### Bug Fixes
+
+* issue when output.schema is empty ([21c726b](https://github.com/TimoBechtel/stapigen/commit/21c726bf253f89597e0a9d76fc7476e12b6db8bf)), closes [#1](https://github.com/TimoBechtel/stapigen/issues/1)
+
 # 1.0.0 (2020-12-27)
 
 
