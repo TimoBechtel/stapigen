@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/TimoBechtel/stapigen/compare/v1.0.1...v1.1.0) (2020-12-27)
+
+
+### Features
+
+* **config:** add basic config validation ([5c3069a](https://github.com/TimoBechtel/stapigen/commit/5c3069aca5aae343f28914ee148f90b7de371c61))
+
 ## [1.0.1](https://github.com/TimoBechtel/stapigen/compare/v1.0.0...v1.0.1) (2020-12-27)
 
 
