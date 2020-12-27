@@ -52,7 +52,7 @@ export function createDirectoryParser({
 						const parse = parser?.find(compatibleWith(extension))?.parse;
 						if (!parse)
 							return console.warn(
-								`no parser found for file ${currentFileOrDirPath}`
+								`No parser found for file ${currentFileOrDirPath}. Skipped.`
 							);
 
 						const id = path.parse(file.name).name.toLowerCase();
