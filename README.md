@@ -1,7 +1,9 @@
 <h1 align="center">stapigen</h1>
 <h3 align="center">Generate static APIs for any set of files</h3>
 <p align="center">
-  <img alt="Version" src="https://img.shields.io/badge/version-1.0.1-blue.svg?cacheSeconds=2592000" />
+	<a href="https://www.npmjs.com/package/stapigen" target="_blank">
+    <img alt="Version" src="https://img.shields.io/npm/v/stapigen.svg">
+  </a>
   <a href="#" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
