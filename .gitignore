@@ -13,3 +13,6 @@ coverage
 
 # build files
 dist
+
+# os related
+.DS_Store
