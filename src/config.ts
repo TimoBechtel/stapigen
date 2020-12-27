@@ -14,10 +14,6 @@ export type Config = {
 	parser?: Parser[];
 };
 
-type Schema = {
-	tags: string[];
-};
-
 export async function parseConfigFile(file: string): Promise<Config> {
 	if (!fs.existsSync(file)) throw `Config file does not exist. (${file})`;
 	const config = await loadConfigFile(path.resolve(file));
