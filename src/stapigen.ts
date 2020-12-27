@@ -8,13 +8,13 @@ import { createFileWriter } from './fileWriter';
 
 export async function generateApi(config: Config) {
 	const traverseDirectory = createDirectoryParser({
-		parsedSchema: parseSchema(config.input.schema),
+		parsedSchema: parseSchema(config.input.schema || ''),
 		parser: config.parser,
 	});
 	let dataObjects: DataObject[];
 	dataObjects = await traverseDirectory(config.input.dir);
 
-	const outPutSchema = parseSchema(config.output.schema);
+	const outPutSchema = parseSchema(config.output.schema || '');
 
 	const collections = generateCollections(outPutSchema, dataObjects);
 

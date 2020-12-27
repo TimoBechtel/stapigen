@@ -123,3 +123,30 @@ test('generates all files in root output directory if output.schema has empty va
 		expect(fs.existsSync(path.join(testDir, file))).toBe(true);
 	});
 });
+
+test('errors out when config is invalid', async () => {
+	global.console.warn = jest.fn();
+
+	const config: any = {
+		input: {
+			dir: 'test/example/input',
+			schema: ':year/:month/:day',
+		},
+		output: {},
+		parser: [
+			{
+				extensions: ['.md'],
+				parse: ({ content }) => ({ text: content }),
+			},
+		],
+	};
+
+	let error = null;
+	try {
+		await generateApi(config);
+	} catch (e) {
+		error = e;
+	}
+	expect(console.warn).toHaveBeenCalledTimes(1);
+	expect(error).not.toBeNull();
+});
