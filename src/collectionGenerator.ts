@@ -6,6 +6,7 @@ export const UNCATEGORIZED_COLLECTION = '_';
 export type Collection = {
 	path: string;
 	data: DataObject[];
+	entrypoint: boolean;
 };
 
 export function generateCollections(
@@ -13,7 +14,7 @@ export function generateCollections(
 	dataList: DataObject[]
 ): Collection[] {
 	return [
-		{ data: dataList, path: '' },
+		{ data: dataList, path: '', entrypoint: false },
 		...recursiveGenerate(parsedSchema, dataList),
 	];
 }
@@ -37,7 +38,11 @@ function recursiveGenerate(
 		const collection = collections.find((c) => c.path === collectionDir);
 		if (collection) collection.data.push(entry);
 		else {
-			collections.push({ path: collectionDir, data: [entry] });
+			collections.push({
+				path: collectionDir,
+				data: [entry],
+				entrypoint: parsedSchema.length === 1,
+			});
 		}
 	});
 	collections.forEach(({ path, data }) => {

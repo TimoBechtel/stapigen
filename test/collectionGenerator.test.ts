@@ -34,50 +34,62 @@ test('generates collections', () => {
 		{
 			path: '',
 			data: testData,
+			entrypoint: false,
 		},
 		{
 			path: '2020',
 			data: [testData[0], testData[1]],
+			entrypoint: false,
 		},
 		{
 			path: '2020/04',
 			data: [testData[0]],
+			entrypoint: false,
 		},
 		{
 			path: '2020/04/13',
 			data: [testData[0]],
+			entrypoint: false,
 		},
 		{
 			path: '2020/04/13/testTopic',
 			data: [testData[0]],
+			entrypoint: true,
 		},
 		{
 			path: '2020/03',
 			data: [testData[1]],
+			entrypoint: false,
 		},
 		{
 			path: '2020/03/02',
 			data: [testData[1]],
+			entrypoint: false,
 		},
 		{
 			path: '2020/03/02/_',
 			data: [testData[1]],
+			entrypoint: true,
 		},
 		{
 			path: '2019',
 			data: [testData[2]],
+			entrypoint: false,
 		},
 		{
 			path: '2019/12',
 			data: [testData[2]],
+			entrypoint: false,
 		},
 		{
 			path: '2019/12/_',
 			data: [testData[2]],
+			entrypoint: false,
 		},
 		{
 			path: '2019/12/_/test',
 			data: [testData[2]],
+			entrypoint: true,
 		},
 	];
 

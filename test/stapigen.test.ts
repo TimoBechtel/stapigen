@@ -12,6 +12,7 @@ beforeAll(() => {
 			[testDir]: {},
 			'test/example/input': {
 				'2020': {
+					'file.md': 'file without a month + day',
 					'04': {
 						'10': {
 							'lorem.md': `# lorem
@@ -65,20 +66,16 @@ test('generates files from config', async () => {
 	};
 
 	const expectedIndexFiles = [
-		'/index.json',
-		'/04/index.json',
 		'/04/13/index.json',
+		'/04/10/index.json',
+		'/_/_/index.json',
 	];
 
 	const expectedFiles = [
-		'/lorem.json',
-		'/thoughts.json',
-		'/randomnotes.json',
-		'/04/lorem.json',
-		'/04/thoughts.json',
-		'/04/randomnotes.json',
 		'/04/13/thoughts.json',
 		'/04/13/randomnotes.json',
+		'/04/10/lorem.json',
+		'/_/_/file.json',
 	];
 
 	await generateApi(config);

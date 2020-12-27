@@ -32,15 +32,17 @@ async function writeCollections(
 	) => Promise<void>
 ) {
 	await Promise.all(
-		collections.map(async ({ path: dir, data }) => {
+		collections.map(async ({ path: dir, data, entrypoint }) => {
 			const directory = path.join(outputDir, dir);
 			await new Promise<void>((resolve, reject) => {
 				fs.mkdir(directory, { recursive: true }, async (error) => {
 					if (error) return reject(error);
-					await writeFile(directory, { name: 'index', data });
-					await Promise.all(
-						data.map((data) => writeFile(directory, { name: data.id, data }))
-					);
+					if (entrypoint) {
+						await writeFile(directory, { name: 'index', data });
+						await Promise.all(
+							data.map((data) => writeFile(directory, { name: data.id, data }))
+						);
+					}
 					resolve();
 				});
 			});
