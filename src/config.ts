@@ -34,5 +34,6 @@ export function parseSchema(schema: string): string[] {
 	return schema
 		.replace(/:/g, '')
 		.replace(/^\/+|\/+$/g, '') // trim leading+trailing slashes
-		.split('/');
+		.split('/')
+		.filter((s) => !!s); // skip empty strings
 }

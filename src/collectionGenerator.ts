@@ -14,7 +14,7 @@ export function generateCollections(
 	dataList: DataObject[]
 ): Collection[] {
 	return [
-		{ data: dataList, path: '', entrypoint: false },
+		{ data: dataList, path: '', entrypoint: parsedSchema.length === 0 },
 		...recursiveGenerate(parsedSchema, dataList),
 	];
 }

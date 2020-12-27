@@ -85,3 +85,41 @@ test('generates files from config', async () => {
 		expect(fs.existsSync(path.join(testDir, file))).toBe(true);
 	});
 });
+
+test('generates all files in root output directory if output.schema has empty value', async () => {
+	global.console.warn = jest.fn();
+
+	const config: Config = {
+		input: {
+			dir: 'test/example/input',
+			schema: ':year/:month/:day',
+		},
+		output: {
+			dir: testDir,
+			schema: '',
+		},
+		parser: [
+			{
+				extensions: ['.md'],
+				parse: ({ content }) => ({ text: content }),
+			},
+		],
+	};
+
+	const expectedIndexFiles = ['/index.json'];
+
+	const expectedFiles = [
+		'/thoughts.json',
+		'/randomnotes.json',
+		'/lorem.json',
+		'/file.json',
+	];
+
+	await generateApi(config);
+
+	expect(console.warn).toHaveBeenCalledTimes(1);
+	[...expectedFiles, ...expectedIndexFiles].forEach((file) => {
+		console.log('file', file);
+		expect(fs.existsSync(path.join(testDir, file))).toBe(true);
+	});
+});

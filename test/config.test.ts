@@ -19,3 +19,9 @@ test('parses schema, ignoring leading and trailing slashes', () => {
 	const expected = ['year', 'month', 'day', 'hour'];
 	expect(parseSchema(testSchema)).toEqual(expected);
 });
+
+test('parseSchema returns empty array on empty schema', () => {
+	const testSchema = '';
+	const expected = [];
+	expect(parseSchema(testSchema)).toEqual(expected);
+});
