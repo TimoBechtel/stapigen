@@ -27,11 +27,7 @@ async function loadConfigFile(file: string): Promise<Config> {
 
 export function validateConfig(config: Config) {
 	if (!config.input.dir) throw 'You need to define an input directory';
-	if (config.input.schema === undefined)
-		console.warn('Config option input.schema is not defined.');
 	if (!config.output.dir) throw 'You need to define an output directory';
-	if (config.output.schema === undefined)
-		console.warn('Config option output.schema is not defined.');
 }
 
 // :year/:category/:movie

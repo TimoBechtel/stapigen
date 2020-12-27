@@ -54,8 +54,6 @@ test('throws on invalid config file', async () => {
 	expect(() => {
 		validateConfig(validConfig);
 	}).not.toThrow();
-	// warns because of undefined schema
-	expect(console.warn).toHaveBeenCalledTimes(2);
 });
 
 test('parses schema', () => {
