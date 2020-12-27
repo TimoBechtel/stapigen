@@ -1,6 +1,6 @@
 {
 	"name": "stapigen",
-	"version": "1.0.1",
+	"version": "1.0.0",
 	"description": "Generate static APIs for any set of files",
 	"main": "dist/stapigen.js",
 	"types": "dist/stapigen.d.ts",
