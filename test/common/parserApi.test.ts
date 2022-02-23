@@ -1,4 +1,3 @@
-import * as path from 'path';
 import { compatibleWith } from '../../src/common/parserApi';
 
 test('finds compatible parser if there is one', () => {

@@ -1,48 +1,39 @@
+jest.mock('fs');
+
+import { fs, vol } from 'memfs';
 import * as path from 'path';
-import * as fs from 'fs';
-import * as mock from 'mock-fs';
 import { Config } from '../src/config';
 import { generateApi } from '../src/stapigen';
 
 const testDir = 'test/_tmp';
 
-beforeAll(() => {
-	mock(
+beforeEach(() => {
+	vol.mkdirSync(testDir, { recursive: true });
+	vol.fromJSON(
 		{
-			[testDir]: {},
-			'test/example/input': {
-				'2020': {
-					'file.md': 'file without a month + day',
-					'04': {
-						'10': {
-							'lorem.md': `# lorem
+			'2020/file.md': 'file without a month + day',
+			'2020/04/10/lorem.md': `# lorem
 
 Lorem ipsum dolor sit amet, consectetur adipisici elit,
 `,
-						},
-						'13': {
-							'incompatible.file': '',
-							'randomNotes.md': `# these are my random notes
-
-- apples
-- oranges
-- bread
-`,
-							'thoughts.md': `# random thoughts
+			'2020/04/13/incompatible.file': '',
+			'2020/04/13/randomNotes.md': `# these are my random notes
+		
+		- apples
+		- oranges
+		- bread
+		`,
+			'2020/04/13/thoughts.md': `# random thoughts
 
 Do we live in a simulation? Yes.
 `,
-						},
-					},
-				},
-			},
 		},
-		{ createCwd: true, createTmp: true }
+		'test/example/input'
 	);
 });
 
-afterAll(() => {
-	mock.restore();
+afterEach(() => {
+	vol.reset();
 });
 
 test('generates files from config', async () => {
@@ -119,7 +110,6 @@ test('generates all files in root output directory if output.schema has empty va
 
 	expect(console.warn).toHaveBeenCalledTimes(1);
 	[...expectedFiles, ...expectedIndexFiles].forEach((file) => {
-		console.log('file', file);
 		expect(fs.existsSync(path.join(testDir, file))).toBe(true);
 	});
 });

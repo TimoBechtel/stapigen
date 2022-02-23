@@ -1,21 +1,18 @@
-import * as mock from 'mock-fs';
+jest.mock('fs');
+
 import * as fs from 'fs';
+import { vol } from 'memfs';
 import * as path from 'path';
 import { createFileWriter } from '../src/fileWriter';
 
-const testRoot = 'testdir';
 const testPath = 'testdir/subdir';
-beforeAll(() => {
-	mock(
-		{
-			'testdir/subdir': {},
-		},
-		{ createCwd: true, createTmp: true }
-	);
+
+beforeEach(() => {
+	vol.mkdirSync(testPath, { recursive: true });
 });
 
-afterAll(() => {
-	mock.restore();
+afterEach(() => {
+	vol.reset();
 });
 
 test('writes file using stringifier', async () => {

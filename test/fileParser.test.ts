@@ -1,20 +1,19 @@
+jest.mock('fs');
+
+import { vol } from 'memfs';
 import { parseFile } from '../src/fileParser';
-import * as mock from 'mock-fs';
 
 const testFile = 'testFile.txt';
 const testContent = '123';
 
-beforeAll(() => {
-	mock(
-		{
-			[testFile]: testContent,
-		},
-		{ createCwd: true, createTmp: true }
-	);
+beforeEach(() => {
+	vol.fromJSON({
+		[testFile]: testContent,
+	});
 });
 
-afterAll(() => {
-	mock.restore();
+afterEach(() => {
+	vol.reset();
 });
 
 test('reads and parses file using parser', async () => {

@@ -1,46 +1,36 @@
-import { parseSchema } from '../src/config';
-import { createDirectoryParser, DataObject } from '../src/directoryParser';
-import * as mock from 'mock-fs';
+jest.mock('fs');
 
-beforeAll(() => {
-	mock(
+import { vol } from 'memfs';
+import { parseSchema } from '../src/config';
+import { createDirectoryParser } from '../src/directoryParser';
+
+beforeEach(() => {
+	vol.fromJSON(
 		{
-			'test/example/input': {
-				'2020': {
-					'Imafileinsomeotherdir.md': 'nothing',
-					'04': {
-						'10': {
-							'lorem.md': `# lorem
+			'2020/Imafileinsomeotherdir.md': 'nothing',
+			'2020/04/10/lorem.md': `# lorem
 
 Lorem ipsum dolor sit amet, consectetur adipisici elit,
 `,
-						},
-						'13': {
-							test: {
-								'somefile.md': '',
-							},
-							'incompatible.file': '',
-							'randomNotes.md': `# these are my random notes
+			'2020/04/13/test/somefile.md': '',
+			'2020/04/13/incompatible.file': '',
+			'2020/04/13/randomNotes.md': `# these are my random notes
 
 - apples
 - oranges
 - bread
 `,
-							'thoughts.md': `# random thoughts
+			'2020/04/13/thoughts.md': `# random thoughts
 
 Do we live in a simulation? Yes.
 `,
-						},
-					},
-				},
-			},
 		},
-		{ createCwd: true, createTmp: true }
+		'test/example/input'
 	);
 });
 
-afterAll(() => {
-	mock.restore();
+afterEach(() => {
+	vol.reset();
 });
 
 test('parses complete directory', async () => {
