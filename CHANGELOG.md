@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/TimoBechtel/stapigen/compare/v1.1.0...v1.2.0) (2022-02-24)
+
+
+### Features
+
+* **plugin:** add plugin system ([2854781](https://github.com/TimoBechtel/stapigen/commit/285478164622088381ac9d6f1cac6e6aae5560d1))
+
 # [1.1.0](https://github.com/TimoBechtel/stapigen/compare/v1.0.1...v1.1.0) (2020-12-27)
 
 
