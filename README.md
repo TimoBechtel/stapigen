@@ -24,6 +24,7 @@
   - [Input](#input)
   - [Output](#output)
   - [Parser](#parser)
+  - [Plugins](#plugins)
 - [Development](#development)
 - [Author](#author)
 - [Contributing](#Contributing)
@@ -138,6 +139,7 @@ module.exports = {
 			parse: ({ name, content }) => ({ filename: name, content }),
 		},
 	],
+	plugins: [],
 };
 ```
 
@@ -247,6 +249,62 @@ will generate `.json` files from `.txt` files with following content:
 }
 ```
 
+### `plugins`
+
+Array containing plugins, you might want to use.
+
+> stapigen allows you to add plugins, powered by [krog](https://github.com/TimoBechtel/krog)
+
+```js
+const myPlugin = require('./myPlugin');
+//...
+	plugins: [
+		myPlugin,
+	],
+//...
+```
+
+For plugin authors: A plugin is just an object with the following properties:
+
+- `name`: the name of the plugin
+- `hooks`: an object with hooks (e.g. `{ 'before:write_collections' : () => {} }`)
+
+A plugin can hook into specific hook points. The following hooks are available:
+
+#### hooks
+
+- `before:write_collections` Called before writing json files, receives the parsed collections as argument. You can also modify the collections or add new ones by returning a new array.
+
+For example:
+
+```ts
+const plugin = {
+	name: 'collections-logger',
+	hooks: {
+		'before:write_collections': ({ collections }) => {
+			console.log('before:write_collections');
+			console.log(collections);
+
+			// modify collections by returning a new arguments object
+			return {
+				collections: [
+					...collections,
+					{
+						id: 'my-new-collection',
+						tags: {
+							myTag: 'my-tag-value',
+						},
+						data: {
+							myProperty: 'my-property-value',
+						},
+					},
+				],
+			};
+		},
+	},
+};
+```
+
 ## Development
 
 ### Run tests
@@ -261,7 +319,7 @@ yarn run test
 
 - Twitter: [@TimoBechtel](https://twitter.com/TimoBechtel)
 - GitHub: [@TimoBechtel](https://github.com/TimoBechtel)
-- Website: https://timobechtel.com
+- Website: <https://timobechtel.com>
 
 ## 🤝 Contributing
 

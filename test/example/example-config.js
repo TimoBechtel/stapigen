@@ -13,4 +13,5 @@ module.exports = {
 			parse: ({ name, content }) => ({ name, content }),
 		},
 	],
+	plugins: [],
 };

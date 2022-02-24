@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { Parser } from './common/parserApi';
+import { Plugin } from './pluginSystem';
 
 export type Config = {
 	input: {
@@ -12,6 +13,7 @@ export type Config = {
 		schema?: string;
 	};
 	parser?: Parser[];
+	plugins?: Plugin[];
 };
 
 export async function parseConfigFile(file: string): Promise<Config> {

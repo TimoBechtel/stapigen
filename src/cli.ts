@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-import * as fs from 'fs';
 import { program } from 'commander';
+import * as fs from 'fs';
 import { parseConfigFile } from './config';
 import { generateApi } from './stapigen';
 const pkg = require('../package.json');
@@ -64,6 +64,7 @@ function generateConfigFile({ fileName }: { fileName: string }) {
 			parse: ({ name, content }) => ({ filename: name, content }),
 		},
 	],
+	plugins: []
 };
 `;
 	fs.writeFile(fileName, EXAMPLE_CONFIG_STRING, (error) => {

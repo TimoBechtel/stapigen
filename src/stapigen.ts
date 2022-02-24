@@ -3,10 +3,13 @@ import * as path from 'path';
 import { Collection, generateCollections } from './collectionGenerator';
 import { GenericObjectData } from './common/parserApi';
 import { Config, parseSchema } from './config';
-import { DataObject, createDirectoryParser } from './directoryParser';
+import { createDirectoryParser, DataObject } from './directoryParser';
 import { createFileWriter } from './fileWriter';
+import { initializePlugins } from './pluginSystem';
 
 export async function generateApi(config: Config) {
+	const hooks = initializePlugins(config.plugins || []);
+
 	const traverseDirectory = createDirectoryParser({
 		parsedSchema: parseSchema(config.input.schema || ''),
 		parser: config.parser,
@@ -16,7 +19,11 @@ export async function generateApi(config: Config) {
 
 	const outPutSchema = parseSchema(config.output.schema || '');
 
-	const collections = generateCollections(outPutSchema, dataObjects);
+	const generatedCollections = generateCollections(outPutSchema, dataObjects);
+
+	const { collections } = await hooks.call('before:write_collections', {
+		args: { collections: generatedCollections },
+	});
 
 	const writeFile = createFileWriter('json', JSON.stringify);
 

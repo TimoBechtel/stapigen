@@ -29,7 +29,8 @@
 		"generator"
 	],
 	"dependencies": {
-		"commander": "^9.0.0"
+		"commander": "^9.0.0",
+		"krog": "^1.0.1"
 	},
 	"devDependencies": {
 		"@semantic-release/changelog": "^6.0.1",
