@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/TimoBechtel/stapigen/compare/v1.2.0...v1.3.0) (2022-02-25)
+
+
+### Features
+
+* **typescript:** add typescript declaration files ([713f53a](https://github.com/TimoBechtel/stapigen/commit/713f53a3d82c15db04245e4959a9ca35675c0913))
+
 # [1.2.0](https://github.com/TimoBechtel/stapigen/compare/v1.1.0...v1.2.0) (2022-02-24)
 
 
