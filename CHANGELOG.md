@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/TimoBechtel/stapigen/compare/v1.3.0...v1.4.0) (2022-03-02)
+
+
+### Features
+
+* **config:** add include option with pattern matching ([e8492a5](https://github.com/TimoBechtel/stapigen/commit/e8492a54c8fd578d759e8d3a91990754d5d32264))
+
 # [1.3.0](https://github.com/TimoBechtel/stapigen/compare/v1.2.0...v1.3.0) (2022-02-25)
 
 
