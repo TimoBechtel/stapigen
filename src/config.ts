@@ -6,6 +6,7 @@ import { Plugin } from './pluginSystem';
 export type Config = {
 	input: {
 		dir: string;
+		include?: string;
 		schema?: string;
 	};
 	output: {

@@ -127,6 +127,7 @@ example:
 module.exports = {
 	input: {
 		dir: 'input',
+		include: '**/*.txt',
 		schema: 'year/month/day',
 	},
 	output: {
@@ -150,6 +151,17 @@ Defines how the source files are structured.
 #### `input.dir`
 
 Location of input files.
+
+#### `input.include` (optional)
+
+Glob pattern for files to include. Everything not matching this pattern will be ignored.
+
+examples:
+
+- only include specific files: `**/*.txt`
+- only include files in a specific directory: `+(a|b)/**/*`
+
+Matching is done using [minimatch](https://github.com/isaacs/minimatch).
 
 #### `input.schema` (optional)
 

@@ -30,12 +30,14 @@
 	],
 	"dependencies": {
 		"commander": "^9.0.0",
-		"krog": "^1.0.1"
+		"krog": "^1.0.1",
+		"minimatch": "^5.0.1"
 	},
 	"devDependencies": {
 		"@semantic-release/changelog": "^6.0.1",
 		"@semantic-release/git": "^10.0.1",
 		"@types/jest": "^27.4.1",
+		"@types/minimatch": "^3.0.5",
 		"@types/node": "^17.0.20",
 		"jest": "^27.5.1",
 		"memfs": "^3.4.1",

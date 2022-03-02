@@ -14,6 +14,7 @@ export async function generateApi(config: Config) {
 		parsedSchema: parseSchema(config.input.schema || ''),
 		parser: config.parser,
 	});
+
 	let dataObjects: DataObject[];
 	dataObjects = await traverseDirectory(config.input.dir);
 
