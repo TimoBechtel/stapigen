@@ -42,6 +42,7 @@ test('generates files from config', async () => {
 	const config: Config = {
 		input: {
 			dir: 'test/example/input',
+			include: '**/*.+(md|file)',
 			schema: ':year/:month/:day',
 		},
 		output: {

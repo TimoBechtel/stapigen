@@ -13,6 +13,7 @@ export async function generateApi(config: Config) {
 	const traverseDirectory = createDirectoryParser({
 		parsedSchema: parseSchema(config.input.schema || ''),
 		parser: config.parser,
+		include: config.input.include,
 	});
 
 	let dataObjects: DataObject[];
